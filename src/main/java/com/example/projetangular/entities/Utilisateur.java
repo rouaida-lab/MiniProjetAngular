@@ -29,6 +29,6 @@ public class Utilisateur implements Serializable {
     Date dateNaissance;
     @ManyToMany()
     private Set<Reservation> reservations = new HashSet<>();
-    @ManyToMany()
-    Set<Livre> livresEmprunte = new HashSet<>();
+    @OneToMany(mappedBy = "etudiantEmp")
+    Set<EmpruntLivre>emprunts = new HashSet<>();
 }

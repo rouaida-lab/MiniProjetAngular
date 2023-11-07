@@ -8,26 +8,21 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Livre implements Serializable {
+public class EmpruntLivre implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    long idLivre;
-    String titre;
-    String nomAuteur;
-    int nbPages;
-    Date dateDePublication;
-    String Description;
-    String image;
+    long idEmprunt;
+    Date dateDebutEmprunt;
+    Date dateFinEmprunt;
+    String etat;
     @ManyToOne()
-    Categorie categorie;
-    @OneToMany(mappedBy = "livre")
-    Set<EmpruntLivre> emprunts = new HashSet<>();
+    Livre livre ;
+    @ManyToOne()
+    Utilisateur etudiantEmp;
 }
