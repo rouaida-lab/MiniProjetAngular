@@ -7,26 +7,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Bibliotheque implements Serializable {
+public class Evenement implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    long idBibliotheque;
+    long idEvenement;
     String nom;
-    String email;
-    long numTel;
-    String horaire;
+    Date dateDebut;
+    Date dateFin;
+    String lieu;
     String description;
-    @OneToMany(mappedBy = "bibliotheque")
-    Set<Evenement> evenements = new HashSet<>();
-    @OneToMany()
-    Set<Livre> livres = new HashSet<>();
+    String etat;
+    String image;
+    @ManyToOne()
+    Bibliotheque bibliotheque;
 
 }

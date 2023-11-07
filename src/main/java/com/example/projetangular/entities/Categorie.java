@@ -15,18 +15,12 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Bibliotheque implements Serializable {
+public class Categorie implements Serializable{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    long idBibliotheque;
+    long idCategorie;
     String nom;
-    String email;
-    long numTel;
-    String horaire;
     String description;
-    @OneToMany(mappedBy = "bibliotheque")
-    Set<Evenement> evenements = new HashSet<>();
-    @OneToMany()
-    Set<Livre> livres = new HashSet<>();
-
+    @OneToMany(mappedBy = "categorie")
+    Set<Livre>livres = new HashSet<>();
 }

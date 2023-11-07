@@ -28,4 +28,7 @@ public class Utilisateur implements Serializable {
     String ecole;
     Date dateNaissance;
     @ManyToMany()
-    private Set<Reservation> reservations = new HashSet<>();}
+    private Set<Reservation> reservations = new HashSet<>();
+    @ManyToMany()
+    Set<Livre> livresEmprunte = new HashSet<>();
+}
