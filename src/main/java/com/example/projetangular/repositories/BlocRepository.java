@@ -1,4 +1,4 @@
-package com.example.projetangular.Repositories;
+package com.example.projetangular.repositories;
 
 import com.example.projetangular.entities.Bloc;
 import com.example.projetangular.entities.Foyer;
