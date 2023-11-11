@@ -25,4 +25,6 @@ public class Foyer implements Serializable {
     private Set<Bloc> blocs;
     @OneToOne(mappedBy = "foyer")
     private Universite universite;
+    @OneToOne()
+    private Bibliotheque bibliotheque;
 }

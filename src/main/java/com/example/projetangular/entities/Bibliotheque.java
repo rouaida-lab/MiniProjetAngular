@@ -28,5 +28,7 @@ public class Bibliotheque implements Serializable {
     Set<Evenement> evenements = new HashSet<>();
     @OneToMany()
     Set<Livre> livres = new HashSet<>();
+    @OneToOne(mappedBy = "bibliotheque")
+    private Foyer foyer;
 
 }
