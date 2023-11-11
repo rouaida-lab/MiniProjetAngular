@@ -1,4 +1,4 @@
-package com.example.projetangular.Repositories;
+package com.example.projetangular.repositories;
 
 import com.example.projetangular.entities.Departement;
 import org.springframework.data.jpa.repository.JpaRepository;

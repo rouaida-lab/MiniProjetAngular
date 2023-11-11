@@ -21,6 +21,7 @@ public class Categorie implements Serializable{
     long idCategorie;
     String nom;
     String description;
+    String image;
     @OneToMany(mappedBy = "categorie")
     Set<Livre>livres = new HashSet<>();
 }
