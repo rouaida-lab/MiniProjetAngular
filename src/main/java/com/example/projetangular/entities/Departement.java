@@ -17,10 +17,10 @@ public class Departement implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     long idDepartement;
-    String nom;
-    String description;
-    String imageDep;
-    String email;
+    String nomDepartement;
+    String responsable;
+    int nombreProfesseurs;
+    String specialite;
     @ManyToOne()
     Universite universite;
 
