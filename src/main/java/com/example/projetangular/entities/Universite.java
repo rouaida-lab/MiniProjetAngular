@@ -17,7 +17,7 @@ import java.util.Set;
 public class Universite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long idUniversite ;
+    long id ;
     String nomUniversite;
     String adresse;
     @OneToOne()
