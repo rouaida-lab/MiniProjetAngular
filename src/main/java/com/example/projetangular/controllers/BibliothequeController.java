@@ -1,7 +1,7 @@
 package com.example.projetangular.controllers;
 
 import com.example.projetangular.entities.Bibliotheque;
-import com.example.projetangular.services.BibliothequeService;
+import com.example.projetangular.services.IBibliothequeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,37 +10,40 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@RequestMapping("bibliotheques")
+
+
 public class BibliothequeController {
-    BibliothequeService bibliothequeService;
+    IBibliothequeService bibliothequeService;
 
 @PostMapping("/addbibliotheque")
 Bibliotheque addBibliotheque(@RequestBody Bibliotheque bibliotheque){
 
     return bibliothequeService.addBibliotheque(bibliotheque);
 }
-    @PostMapping("/bibliotheque/{id}")
+    @GetMapping("/{id}")
     Bibliotheque retrieveBibliotheque(@PathVariable Long id){
 
         return bibliothequeService.getBibliotheque(id);
     }
-    @PostMapping("/bibliotheque")
+    @GetMapping("")
     List<Bibliotheque> retrieveBibliotheques(){
 
         return bibliothequeService.getAllBibliotheque();
     }
-    @DeleteMapping("/bibliotheque/{id}")
+    @DeleteMapping("/{id}")
     void deleteBibliotheque(@PathVariable Long id){
 
         bibliothequeService.deleteBibliotheque(id);
     }
-    @PutMapping("/bibliotheque")
+    @PutMapping("")
     Bibliotheque updateBibliotheque(@RequestBody Bibliotheque bibliotheque){
 
         return bibliothequeService.updateBibliotheque(bibliotheque);
     }
 
-    @PutMapping("/bloc/aff/{nombibliotheque}/{nomFoyer}")
-    public Bibliotheque affecterBlocAFoyer(@PathVariable String nombibliotheque,@PathVariable String nomFoyer){
+    @PutMapping("/aff/{nombibliotheque}/{nomFoyer}")
+    public Bibliotheque affecterBibliothequeAFoyer(@PathVariable String nombibliotheque,@PathVariable String nomFoyer){
 
         return  bibliothequeService.affecterBibliothequeAFoyer(nombibliotheque,nomFoyer);
     }

@@ -19,7 +19,7 @@ public class Bibliotheque implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     long idBibliotheque;
-    String nom;
+    String nomB;
     String email;
     long numTel;
     String horaire;

@@ -5,6 +5,6 @@ import com.example.projetangular.entities.Bloc;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BibliothequeRepository extends JpaRepository<Bibliotheque,Long> {
-    Bibliotheque findByNomBibliotheque(String nom);
+    Bibliotheque findByNomB(String nomB);
 
 }

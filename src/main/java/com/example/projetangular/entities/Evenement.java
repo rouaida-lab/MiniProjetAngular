@@ -18,7 +18,7 @@ public class Evenement implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     long idEvenement;
-    String nom;
+    String nomE;
     Date dateDebut;
     Date dateFin;
     String lieu;
