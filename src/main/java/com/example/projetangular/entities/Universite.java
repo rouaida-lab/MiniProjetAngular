@@ -17,11 +17,18 @@ import java.util.Set;
 public class Universite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id ;
+    @Column(name="idUniversite")
+    long idUniversite ;
+
+    @Column(name="nomUniversite")
     String nomUniversite;
+
+    @Column(name="adresse")
     String adresse;
+
     @OneToOne()
     private Foyer foyer;
+
     @OneToMany(mappedBy = "universite")
     Set<Departement> departements = new HashSet<>();
 }

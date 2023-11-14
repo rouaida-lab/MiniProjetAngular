@@ -16,11 +16,21 @@ import java.io.Serializable;
 public class Departement implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    long id;
+    @Column(name="idDepartement")
+    long idDepartement;
+
+    @Column(name="nomDepartement")
     String nomDepartement;
+
+    @Column(name="responsable")
     String responsable;
+
+    @Column(name="nombreProfesseurs")
     int nombreProfesseurs;
+
+    @Column(name="specialite")
     String specialite;
+
     @ManyToOne()
     Universite universite;
 
