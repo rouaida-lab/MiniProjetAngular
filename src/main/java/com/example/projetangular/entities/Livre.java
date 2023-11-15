@@ -1,5 +1,6 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +27,11 @@ public class Livre implements Serializable {
     Date dateDePublication;
     String Description;
     String image;
+
     @ManyToOne()
+    @JsonIgnore
     Categorie categorie;
+
     @OneToMany(mappedBy = "livre")
     Set<EmpruntLivre> emprunts = new HashSet<>();
 }

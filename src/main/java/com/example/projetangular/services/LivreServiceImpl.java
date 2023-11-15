@@ -11,6 +11,10 @@ public class LivreServiceImpl implements ILivreService{
 
     LivreRepository livreRepository;
 
+    public LivreServiceImpl(LivreRepository livreRepository) {
+        this.livreRepository = livreRepository;
+    }
+
     @Override
     public Livre addLivre(Livre livre) {
         return livreRepository.save(livre);

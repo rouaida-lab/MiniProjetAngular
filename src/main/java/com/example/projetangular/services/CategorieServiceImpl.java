@@ -11,6 +11,11 @@ public class CategorieServiceImpl implements ICategorieService {
 
 
     CategorieRepository categorieRepository;
+
+    public CategorieServiceImpl(CategorieRepository categorieRepository) {
+        this.categorieRepository = categorieRepository;
+    }
+
     @Override
     public Categorie addCategorie(Categorie categorie) {
         return categorieRepository.save(categorie) ;

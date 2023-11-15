@@ -1,10 +1,14 @@
 package com.example.projetangular.controllers;
 
+import com.example.projetangular.FileUploadUtil;
 import com.example.projetangular.entities.Categorie;
 import com.example.projetangular.services.ICategorieService;
 import lombok.AllArgsConstructor;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -16,8 +20,21 @@ public class categorieController {
 
 
     @PostMapping("/add")
-    Categorie addCategorie(@RequestBody Categorie categorie){
-        return categorieService.addCategorie(categorie);
+    Categorie addCategorie(@RequestParam("nom") String nom,
+                           @RequestParam("description") String description , @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+        Categorie categorie = new Categorie();
+        categorie.setNom(nom);
+        categorie.setDescription(description);
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        categorie.setImage(fileName);
+        Categorie Savedcategorie = categorieService.addCategorie(categorie);
+
+        String uploadDir = "images/" + Savedcategorie.getIdCategorie();
+
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        return Savedcategorie;
     }
 
 

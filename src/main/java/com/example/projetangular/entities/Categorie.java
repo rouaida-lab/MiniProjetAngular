@@ -1,11 +1,14 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,5 +26,6 @@ public class Categorie implements Serializable{
     String description;
     String image;
     @OneToMany(mappedBy = "categorie")
+    @JsonManagedReference
     Set<Livre>livres = new HashSet<>();
 }
