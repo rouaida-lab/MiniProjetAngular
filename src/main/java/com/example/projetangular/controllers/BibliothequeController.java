@@ -37,10 +37,10 @@ Bibliotheque addBibliotheque(@RequestBody Bibliotheque bibliotheque){
 
         bibliothequeService.deleteBibliotheque(id);
     }
-    @PutMapping("")
-    Bibliotheque updateBibliotheque(@RequestBody Bibliotheque bibliotheque){
+    @PutMapping("/updatebiblio/{id}")
+    Bibliotheque updateBibliotheque(@PathVariable Long id ,@RequestBody Bibliotheque bibliotheque){
 
-        return bibliothequeService.updateBibliotheque(bibliotheque);
+        return bibliothequeService.updateBibliotheque(id,bibliotheque);
     }
 
     @PutMapping("/aff/{nombibliotheque}/{nomFoyer}")

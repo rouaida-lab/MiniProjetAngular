@@ -13,6 +13,6 @@ public interface IEvenementService {
 
     void deleteEvenement(long idevenement);
 
-    Evenement updateEvenement(Evenement evenement);
+    Evenement updateEvenement(long idEvenement ,Evenement evenement);
     public Evenement affecterEvenementABibliotheque( String nomE, String nomB) ;
 }

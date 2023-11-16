@@ -4,6 +4,8 @@ import com.example.projetangular.entities.Evenement;
 import com.example.projetangular.services.IEvenementService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -35,10 +37,10 @@ Evenement addEvenement(@RequestBody Evenement evenement){
 
         evenementService.deleteEvenement(id);
     }
-    @PutMapping("")
-    Evenement updateEvenement(@RequestBody Evenement evenement){
+    @PutMapping("/updateevent/{id}")
+    Evenement updateEvenement(@PathVariable Long id ,@RequestBody Evenement evenement){
 
-        return evenementService.updateEvenement(evenement);
+        return evenementService.updateEvenement(id,evenement);
     }
 
     @PutMapping("/aff/{nomEvenement}/{nomBibliotheque}")

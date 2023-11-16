@@ -45,7 +45,8 @@ public class BibliothequeServiceImp implements IBibliothequeService {
         bibliothequeRepository.deleteById(idBibliotheque);
     }
 
-  public Bibliotheque updateBibliotheque(Bibliotheque bibliotheque) {
+  public Bibliotheque updateBibliotheque(long idBibliotheque , Bibliotheque bibliotheque) {
+        bibliotheque.setIdBibliotheque(idBibliotheque);
         return bibliothequeRepository.save(bibliotheque) ;
   }
 

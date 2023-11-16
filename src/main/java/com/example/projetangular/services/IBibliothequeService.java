@@ -13,6 +13,6 @@ public interface IBibliothequeService {
 
     void deleteBibliotheque(long idBibliotheque);
 
-    Bibliotheque updateBibliotheque(Bibliotheque bibliotheque);
+    Bibliotheque updateBibliotheque(long idBibliotheque ,Bibliotheque bibliotheque);
     public Bibliotheque affecterBibliothequeAFoyer( String nomB, String nomFoyer) ;
 }

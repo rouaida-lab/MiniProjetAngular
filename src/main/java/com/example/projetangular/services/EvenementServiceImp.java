@@ -47,7 +47,8 @@ public class EvenementServiceImp implements IEvenementService {
         evenementRepository.deleteById(idEvenement);
     }
 
-  public Evenement updateEvenement(Evenement evenement) {
+  public Evenement updateEvenement(long idEvenement , Evenement evenement) {
+        evenement.setIdEvenement(idEvenement);
         return evenementRepository.save(evenement) ;
   }
 

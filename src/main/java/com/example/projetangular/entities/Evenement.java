@@ -23,7 +23,10 @@ public class Evenement implements Serializable {
     Date dateFin;
     String lieu;
     String description;
-    String etat;
+    @Enumerated(EnumType.STRING)
+    //IL FAUT AJOUTER CETTE LIGNE PAR DEFAUT IL LA DECLARE 0  1 2
+    EtatEvent etatEvent;
+
     String image;
     @ManyToOne()
     Bibliotheque bibliotheque;
