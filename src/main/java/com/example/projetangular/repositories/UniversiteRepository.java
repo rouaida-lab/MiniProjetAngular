@@ -1,6 +1,7 @@
 package com.example.projetangular.repositories;
 
 import com.example.projetangular.entities.Universite;
+import com.example.projetangular.entities.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
