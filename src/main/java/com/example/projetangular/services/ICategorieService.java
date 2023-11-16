@@ -16,4 +16,7 @@ public interface ICategorieService {
     void deleteCategorie(long idCategorie);
 
     Categorie updateCategorie(Categorie categorie);
+
+    Categorie getCategorieDuLivre(long idLivre);
+
 }

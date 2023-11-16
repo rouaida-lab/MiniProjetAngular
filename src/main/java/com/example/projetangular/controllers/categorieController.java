@@ -49,16 +49,35 @@ public class categorieController {
         return categorieService.getAllCategorie();
     }
 
-
     @DeleteMapping("/{id}")
     void deleteCategorie(@PathVariable Long id){
         categorieService.deleteCategorie(id);
     }
 
 
-    @PutMapping("")
-    Categorie updateCategorie(@RequestBody Categorie categorie){
-        return categorieService.updateCategorie(categorie);
+    @GetMapping("/livre/{idLivre}")
+    Categorie retrieveCategorieByLivre(@PathVariable Long idLivre){
+        return categorieService.getCategorieDuLivre(idLivre);
+    }
+
+    @PutMapping("/{id}")
+    Categorie updateCategorie(@PathVariable Long id ,@RequestParam("nom") String nom,
+                              @RequestParam("description") String description ,
+                              @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+        Categorie categorie = categorieService.getCategorie(id);
+        categorie.setNom(nom);
+        categorie.setDescription(description);
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        categorie.setImage(fileName);
+        Categorie updatedcategorie = categorieService.updateCategorie(categorie);
+
+        String uploadDir = "images/" + updatedcategorie.getIdCategorie();
+
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        return updatedcategorie;
     }
 
 

@@ -1,6 +1,8 @@
 package com.example.projetangular.services;
 
+import com.example.projetangular.entities.Categorie;
 import com.example.projetangular.entities.Livre;
+import com.example.projetangular.repositories.CategorieRepository;
 import com.example.projetangular.repositories.LivreRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,7 @@ public class LivreServiceImpl implements ILivreService{
         return livreRepository.findById(idLivre).orElse(null);
     }
 
+
     @Override
     public List<Livre> getAllLivre() {
         return livreRepository.findAll();
@@ -39,4 +42,7 @@ public class LivreServiceImpl implements ILivreService{
     public Livre updateLivre(Livre livre) {
         return livreRepository.save(livre);
     }
+
+
+
 }

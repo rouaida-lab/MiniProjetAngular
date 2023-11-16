@@ -1,5 +1,6 @@
 package com.example.projetangular.services;
 
+import com.example.projetangular.entities.Categorie;
 import com.example.projetangular.entities.Livre;
 
 import java.util.List;

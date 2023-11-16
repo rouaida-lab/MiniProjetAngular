@@ -72,6 +72,8 @@ public class livreController {
 
     @GetMapping("")
     List<Livre> retrieveLivres(){
+
+
         return livreService.getAllLivre();
     }
 
@@ -82,9 +84,37 @@ public class livreController {
     }
 
 
-    @PutMapping("")
-    Livre updateLivre(@RequestBody Livre livre){
-        return livreService.updateLivre(livre);
+    @PutMapping("/{idLivre}")
+    Livre updateLivre(@PathVariable Long idLivre,
+                      @RequestParam("titre") String titre,
+                      @RequestParam("description") String description,
+                      @RequestParam("nomAuteur") String nomAuteur,
+                      @RequestParam("nbPages") Integer nbPages,
+                      @RequestParam("dateDePublication") String dateDePublication,
+                      @RequestParam("image") MultipartFile multipartFile) throws ParseException, IOException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedDate = dateFormat.parse(dateDePublication);
+
+        Livre livre = livreService.getLivre(idLivre);
+
+        livre.setTitre(titre);
+        livre.setDescription(description);
+        livre.setNomAuteur(nomAuteur);
+        livre.setNbPages(nbPages);
+        livre.setDateDePublication(parsedDate);
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        livre.setImage(fileName);
+
+        Livre updatedLivre = livreService.updateLivre(livre);
+
+        String uploadDir = "images_livres/" + updatedLivre.getIdLivre();
+
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        return updatedLivre;
+
     }
 
 }

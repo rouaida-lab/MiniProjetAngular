@@ -28,7 +28,7 @@ public class Livre implements Serializable {
     String Description;
     String image;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     Categorie categorie;
 
