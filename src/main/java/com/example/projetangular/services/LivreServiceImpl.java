@@ -33,6 +33,12 @@ public class LivreServiceImpl implements ILivreService{
         return livreRepository.findAll();
     }
 
+
+    @Override
+    public List<Livre> getAllLivreByCategory(Categorie categorie) {
+        return livreRepository.findAllByCategorie(categorie);
+    }
+
     @Override
     public void deleteLivre(long idLivre) {
         livreRepository.deleteById(idLivre);

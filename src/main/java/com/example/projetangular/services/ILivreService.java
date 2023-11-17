@@ -17,4 +17,6 @@ public interface ILivreService {
 
     Livre updateLivre(Livre livre);
 
+    List<Livre> getAllLivreByCategory(Categorie categorie);
+
 }

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -72,14 +75,34 @@ public class livreController {
 
     @GetMapping("")
     List<Livre> retrieveLivres(){
-
-
         return livreService.getAllLivre();
+    }
+
+    @GetMapping("/category/{idCategory}")
+    List<Livre> retrieveLivres(@PathVariable Long idCategory){
+
+        Categorie categorie = categorieService.getCategorie(idCategory);
+        return livreService.getAllLivreByCategory(categorie);
     }
 
 
     @DeleteMapping("/{id}")
     void deleteLivre(@PathVariable Long id){
+        Livre livre = livreService.getLivre(id);
+
+        String cheminImage ="images_livres/" + livre.getIdLivre() + "/" + livre.getImage();
+        Path cheminFichier = Paths.get(cheminImage);
+
+        try {
+            Files.delete(cheminFichier);
+
+            Path cheminDossier = cheminFichier.getParent();
+            Files.delete(cheminDossier);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         livreService.deleteLivre(id);
     }
 

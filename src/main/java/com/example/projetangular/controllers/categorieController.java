@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -51,6 +54,21 @@ public class categorieController {
 
     @DeleteMapping("/{id}")
     void deleteCategorie(@PathVariable Long id){
+
+        Categorie categorie = categorieService.getCategorie(id);
+        String cheminImage ="images/" + categorie.getIdCategorie() + "/" + categorie.getImage();
+        Path cheminFichier = Paths.get(cheminImage);
+
+        try {
+            Files.delete(cheminFichier);
+
+            Path cheminDossier = cheminFichier.getParent();
+            Files.delete(cheminDossier);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         categorieService.deleteCategorie(id);
     }
 
