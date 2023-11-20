@@ -2,6 +2,7 @@ package com.example.projetangular.controllers;
 import com.example.projetangular.FileUploadUtil;
 import com.example.projetangular.entities.Categorie;
 import com.example.projetangular.entities.Livre;
+import com.example.projetangular.entities.Utilisateur;
 import com.example.projetangular.services.ICategorieService;
 import com.example.projetangular.services.ILivreService;
 import lombok.AllArgsConstructor;
@@ -79,10 +80,16 @@ public class livreController {
     }
 
     @GetMapping("/category/{idCategory}")
-    List<Livre> retrieveLivres(@PathVariable Long idCategory){
+    List<Livre> retrieveLivresByCategory(@PathVariable Long idCategory){
 
         Categorie categorie = categorieService.getCategorie(idCategory);
         return livreService.getAllLivreByCategory(categorie);
+    }
+
+
+    @GetMapping("/emprunt/{idEmprunt}")
+    Livre getLivreByEmprunt(@PathVariable Long idEmprunt){
+        return livreService.getLivreByEmprunt(idEmprunt);
     }
 
 

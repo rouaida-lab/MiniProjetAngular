@@ -26,6 +26,8 @@ public class Categorie implements Serializable{
     String description;
     String image;
     @OneToMany(mappedBy = "categorie")
+
+
     @JsonManagedReference
     Set<Livre>livres = new HashSet<>();
 }

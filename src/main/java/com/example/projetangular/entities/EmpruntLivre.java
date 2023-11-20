@@ -1,5 +1,8 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,8 +24,13 @@ public class EmpruntLivre implements Serializable {
     Date dateDebutEmprunt;
     Date dateFinEmprunt;
     String etat;
+
     @ManyToOne()
+    @JsonBackReference
     Livre livre ;
+
+
     @ManyToOne()
+    @JsonBackReference
     Utilisateur etudiantEmp;
 }

@@ -1,5 +1,6 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,11 +25,15 @@ public class Utilisateur implements Serializable {
     RoleUtilisateur role;
     String nomEt;
     String prenomEt;
+    String email;
+    String password;
     long cin;
     String ecole;
     Date dateNaissance;
     @ManyToMany()
     private Set<Reservation> reservations = new HashSet<>();
+
     @OneToMany(mappedBy = "etudiantEmp")
+    @JsonManagedReference
     Set<EmpruntLivre>emprunts = new HashSet<>();
 }

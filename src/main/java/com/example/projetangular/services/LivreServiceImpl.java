@@ -40,6 +40,11 @@ public class LivreServiceImpl implements ILivreService{
     }
 
     @Override
+    public Livre getLivreByEmprunt(long idEmprunt) {
+        return livreRepository.findByEmpruntId(idEmprunt);
+    }
+
+    @Override
     public void deleteLivre(long idLivre) {
         livreRepository.deleteById(idLivre);
     }
