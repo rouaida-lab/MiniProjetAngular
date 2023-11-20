@@ -6,7 +6,10 @@ import com.example.projetangular.repositories.EvenementRepository;
 import com.example.projetangular.repositories.ChambreRepository;
 import com.example.projetangular.repositories.BibliothequeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,6 +54,10 @@ public class EvenementServiceImp implements IEvenementService {
         evenement.setIdEvenement(idEvenement);
         return evenementRepository.save(evenement) ;
   }
+    public void updateEventStartDate(long eventId, Date newStartDate) {
+        evenementRepository.updateDateDebut(eventId, newStartDate);
+    }
+
 
     @Override
     public Evenement affecterEvenementABibliotheque(String nomE, String nomB) {
