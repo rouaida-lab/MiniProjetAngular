@@ -15,4 +15,10 @@ public interface IEmpruntLivreService {
     void deleteEmpruntLivre(long idEmpruntLivre);
 
     EmpruntLivre updateEmpruntLivre(EmpruntLivre empruntLivre);
+
+    EmpruntLivre accepterEmpruntLivre(long idEmpruntLivre);
+
+    void refuserEmpruntLivre(long idEmpruntLivre);
+
+
 }

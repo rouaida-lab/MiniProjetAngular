@@ -3,6 +3,7 @@ package com.example.projetangular.controllers;
 import com.example.projetangular.entities.EmpruntLivre;
 import com.example.projetangular.entities.Livre;
 import com.example.projetangular.entities.Utilisateur;
+import com.example.projetangular.services.EmailService;
 import com.example.projetangular.services.IEmpruntLivreService;
 import com.example.projetangular.services.ILivreService;
 import com.example.projetangular.services.IUtilisateurService;
@@ -25,6 +26,8 @@ public class empruntLivreController {
 
     IUtilisateurService utilisateurService;
 
+    EmailService emailService;
+
 
     @PostMapping("/add")
     EmpruntLivre addEmpruntLivre(@RequestParam("email") String email , @RequestParam("dateDebutEmprunt") String dateDebutEmprunt , @RequestParam("dateFinEmprunt") String dateFinEmprunt , @RequestParam("idLivre") Long idLivre) throws ParseException {
@@ -42,6 +45,8 @@ public class empruntLivreController {
         empruntLivre.setEtudiantEmp(etudiant);
         empruntLivre.setLivre(livre);
         empruntLivre.setEtat("non valide");
+
+        livreService.updateDisponibiliteLivre(livre,false);
 
         return empruntLivreService.addEmpruntLivre(empruntLivre);
     }
@@ -66,6 +71,20 @@ public class empruntLivreController {
     @PutMapping("/{id}")
     EmpruntLivre updateEmpruntLivre(@RequestBody EmpruntLivre empruntLivre)  {
         return empruntLivreService.updateEmpruntLivre(empruntLivre);
+    }
+
+    @PutMapping("/accepter/{id}")
+    EmpruntLivre accepterEmpruntLivre(@PathVariable Long id)  {
+        emailService.sendEmail("lina.laroussi@esprit.tn","Accpetation emprunt livre","nous avons accepté votre demande d'emprunt de livre vous pouvez venir à tout moment le récupérer");
+        return empruntLivreService.accepterEmpruntLivre(id);
+    }
+
+    @DeleteMapping("/refuser/{id}/{idLivre}")
+    void refuserEmpruntLivre(@PathVariable Long id , @PathVariable Long idLivre){
+        Livre livre = livreService.getLivre(idLivre);
+        livreService.updateDisponibiliteLivre(livre,true);
+        emailService.sendEmail("lina.laroussi@esprit.tn","Refus emprunt livre","nous avons refusé votre demande d'emprunt de livre vous pouvez voir un autre jour");
+        empruntLivreService.refuserEmpruntLivre(id);
     }
 
 }

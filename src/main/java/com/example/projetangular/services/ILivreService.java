@@ -22,4 +22,6 @@ public interface ILivreService {
 
     Livre getLivreByEmprunt(long idEmprunt);
 
+    void updateDisponibiliteLivre(Livre livre , boolean disp);
+
 }

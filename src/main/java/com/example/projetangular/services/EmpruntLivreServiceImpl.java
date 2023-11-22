@@ -41,4 +41,17 @@ public class EmpruntLivreServiceImpl implements IEmpruntLivreService {
     public EmpruntLivre updateEmpruntLivre(EmpruntLivre empruntLivre) {
         return empruntLivreRepository.save(empruntLivre);
     }
+
+    @Override
+    public EmpruntLivre accepterEmpruntLivre(long idEmpruntLivre) {
+        EmpruntLivre empruntlivre = empruntLivreRepository.findById(idEmpruntLivre).orElse(null);
+        empruntlivre.setEtat("valide");
+        return empruntLivreRepository.save(empruntlivre);
+    }
+
+    @Override
+    public void refuserEmpruntLivre(long idEmpruntLivre) {
+        EmpruntLivre empruntLivre = empruntLivreRepository.findById(idEmpruntLivre).orElse(null);
+        empruntLivreRepository.deleteById(idEmpruntLivre);
+    }
 }

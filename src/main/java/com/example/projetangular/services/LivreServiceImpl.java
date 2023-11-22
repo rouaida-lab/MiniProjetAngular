@@ -45,6 +45,12 @@ public class LivreServiceImpl implements ILivreService{
     }
 
     @Override
+    public void updateDisponibiliteLivre(Livre livre , boolean disp) {
+        livre.setDisponibilite(disp);
+        livreRepository.save(livre) ;
+    }
+
+    @Override
     public void deleteLivre(long idLivre) {
         livreRepository.deleteById(idLivre);
     }

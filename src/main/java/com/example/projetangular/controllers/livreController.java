@@ -53,6 +53,7 @@ public class livreController {
         livre.setNbPages(nbPages);
         livre.setDateDePublication(parsedDate);
         livre.setCategorie(categorie);
+        livre.setDisponibilite(true);
 
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         livre.setImage(fileName);
