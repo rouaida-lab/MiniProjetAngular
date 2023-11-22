@@ -35,8 +35,18 @@ public class UniversiteController {
         universiteService.deleteUniversite(id);
     }
 
-    @PutMapping("/update")
-    public Universite updateUniversite(@RequestBody Universite universite) {
+    @PutMapping("/{id}")
+    public Universite updateUniversite(
+            @PathVariable Long id,
+            @RequestParam("nomUniversite") String nomUniversite,
+            @RequestParam("adresse") String adresse) {
+
+        Universite universite = universiteService.getUniversite(id);
+        universite.setNomUniversite(nomUniversite);
+        universite.setAdresse(adresse);
+
+        // Mettez à jour les autres champs si nécessaire
+
         return universiteService.updateUniversite(universite);
     }
 

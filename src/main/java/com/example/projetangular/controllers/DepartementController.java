@@ -19,57 +19,40 @@ public class DepartementController {
     IDepartementService ds;
 
 
-
-    @PostMapping("addDepartment")
+    @PostMapping("/addDepartment")
     public Departement addDepartment(@RequestBody Departement d) {
         return ds.addDepartment(d);
     }
 
 
-
-    @PostMapping("addDepartments")
-    public List<Departement> addDepartment(@RequestBody List<Departement> listDepartment) {
-        return ds.addDepartment(listDepartment);
-    }
-
-
-
-    @PutMapping("updateDepartment/{id}")
-    public Departement updateDepartment(@RequestBody Departement d,@PathVariable long id) {
-        return ds.updateDepartment(d,id);
-    }
-
-
-
-    @PutMapping("updateDepartments")
-    public List<Departement> updateDepartment(@RequestBody List<Departement> listDepartment) {
-        return ds.updateDepartments(listDepartment);
-    }
-
-
-    @DeleteMapping("deleteDepartmentbyId")
-    public void deleteDepartment(@RequestParam Long id) {
+    @DeleteMapping("/deleteDepartment/{id}")
+    public void deleteDepartment(@PathVariable Long id) {
         ds.deleteDepartment(id);
     }
 
-
-
-    @DeleteMapping("deleteDepartment")
-    public void deleteDepartment(@RequestBody Departement d) {
-        ds.deleteDepartment(d);
+    @GetMapping("/getAllDepartments")
+    public List<Departement> getAllDepartments() {
+        return ds.getAllDepartements();
     }
 
-    @GetMapping("findAllDepartments")
-    public List<Departement> findAllDepartment() {
-        return ds.findAllDepartment();
+    @GetMapping("/getDepartementById/{id}")
+    public Departement getDepartementById(@PathVariable Long id) {
+        return ds.getDepartement(id);
     }
 
+    @PutMapping("/update/{id}")
+    public Departement updateDepartement(
+            @PathVariable Long id,
+            @RequestParam("nomDepartement") String nomDepartement,
+            @RequestParam("responsable") String responsable,
+            @RequestParam("nombreProfesseurs") int nombreProfesseurs,
+            @RequestParam("specialite") String specialite) {
 
+        Departement departement = ds.getDepartement(id);
+        departement.setNomDepartement(nomDepartement);
+        departement.setResponsable(responsable);
+        departement.setNombreProfesseurs(nombreProfesseurs);
+        departement.setSpecialite(specialite);
 
-    @GetMapping("findDepartmentById")
-    public Departement findDepartmentById(@RequestParam Long id) {
-        return ds.findDepartmentById(id);
-    }
-
-
+        return ds.updateDepartment(departement);    }
 }
