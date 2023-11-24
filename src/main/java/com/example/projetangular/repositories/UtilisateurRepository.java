@@ -10,4 +10,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
 
     @Query("SELECT u FROM Utilisateur u JOIN u.emprunts e WHERE e.idEmprunt = :idEmprunt")
     Utilisateur findByEmpruntId(@Param("idEmprunt") Long idEmprunt);
+
+
+    @Query("SELECT u.email FROM Utilisateur u where u.idEtudiant = :id")
+    String findEmailByUserId(@Param("id") Long id);
 }

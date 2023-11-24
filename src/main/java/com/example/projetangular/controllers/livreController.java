@@ -122,10 +122,17 @@ public class livreController {
                       @RequestParam("nomAuteur") String nomAuteur,
                       @RequestParam("nbPages") Integer nbPages,
                       @RequestParam("dateDePublication") String dateDePublication,
+                      @RequestParam("idCategorie") String idCategorie,
+                      @RequestParam("disponibilite") String disponibilite,
                       @RequestParam("image") MultipartFile multipartFile) throws ParseException, IOException {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date parsedDate = dateFormat.parse(dateDePublication);
+
+        long idCategorieLong = Long.parseLong(idCategorie);
+        long disp = Long.parseLong(disponibilite);
+
+        Categorie categorie = categorieService.getCategorie(idCategorieLong);
 
         Livre livre = livreService.getLivre(idLivre);
 
@@ -134,6 +141,13 @@ public class livreController {
         livre.setNomAuteur(nomAuteur);
         livre.setNbPages(nbPages);
         livre.setDateDePublication(parsedDate);
+        livre.setCategorie(categorie);
+
+        if(disp == 1){
+            livre.setDisponibilite(true);
+        } else if (disp == 0) {
+            livre.setDisponibilite(false);
+        }
 
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         livre.setImage(fileName);

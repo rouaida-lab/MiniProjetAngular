@@ -25,4 +25,11 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     public Utilisateur getUtilisateurByEmprunt(long idEmprunt) {
         return utilisateurRepository.findByEmpruntId(idEmprunt);
     }
+
+    @Override
+    public String getEmailUtilisateur(long id) {
+        return utilisateurRepository.findEmailByUserId(id);
+    }
+
+
 }
