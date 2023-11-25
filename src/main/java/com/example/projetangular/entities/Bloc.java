@@ -15,9 +15,9 @@ import java.util.Set;
 public class Bloc implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    long idBloc;
-    String nomBloc ;
-    long capaciteBloc ;
+    private long idBloc;
+    private String nomBloc ;
+    private long capaciteBloc ;
     @ManyToOne()
     Foyer foyer;
     @OneToMany(mappedBy="bloc")
