@@ -54,4 +54,25 @@ public class EmpruntLivreServiceImpl implements IEmpruntLivreService {
         EmpruntLivre empruntLivre = empruntLivreRepository.findById(idEmpruntLivre).orElse(null);
         empruntLivreRepository.deleteById(idEmpruntLivre);
     }
+
+    @Override
+    public int countEmpruntLivres() {
+        List<EmpruntLivre> empruntLivres = empruntLivreRepository.findAll();
+        System.out.println(empruntLivres.size());
+        return empruntLivres.size();
+    }
+
+    @Override
+    public int countEmpruntLivresEncours() {
+        List<EmpruntLivre> empruntLivres = empruntLivreRepository.findEmpruntsLivreEnCours();
+        return empruntLivres.size();
+    }
+
+    @Override
+    public int countEmpruntLivresAccepte() {
+        List<EmpruntLivre> empruntLivres = empruntLivreRepository.findEmpruntsLivreAccepte();
+        return empruntLivres.size();
+    }
+
+
 }

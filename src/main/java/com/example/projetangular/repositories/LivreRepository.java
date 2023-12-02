@@ -16,4 +16,8 @@ public interface LivreRepository extends JpaRepository<Livre,Long> {
 
     @Query("SELECT l FROM Livre l JOIN l.emprunts e WHERE e.idEmprunt = :idEmprunt")
     Livre findByEmpruntId(@Param("idEmprunt") Long idEmprunt);
+
+
+    @Query("SELECT l FROM Livre l WHERE l.nbEmprunts = (SELECT MAX(l2.nbEmprunts) FROM Livre l2)")
+    Livre findLivreWithMaxEmprunts();
 }

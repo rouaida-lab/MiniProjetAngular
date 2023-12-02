@@ -20,5 +20,9 @@ public interface IEmpruntLivreService {
 
     void refuserEmpruntLivre(long idEmpruntLivre);
 
+    int countEmpruntLivres();
+    int countEmpruntLivresEncours();
+    int countEmpruntLivresAccepte();
+
 
 }

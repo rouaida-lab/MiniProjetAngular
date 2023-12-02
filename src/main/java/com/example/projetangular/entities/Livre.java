@@ -34,6 +34,10 @@ public class Livre implements Serializable {
     int nbLike;
     boolean disponibilite;
 
+    public void incrementerNbEmprunts() {
+        this.nbEmprunts++;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference
     Categorie categorie;

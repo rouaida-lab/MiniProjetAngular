@@ -80,6 +80,12 @@ public class livreController {
         return livreService.getAllLivre();
     }
 
+
+    @GetMapping("/maxEmprunts")
+    Livre getLivreWithMaxEmprunts(){
+        return livreService.getLivreWithMaxEmprunts();
+    }
+
     @GetMapping("/category/{idCategory}")
     List<Livre> retrieveLivresByCategory(@PathVariable Long idCategory){
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Email Template</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+<body>
+<img th:src="@{'cid:' + ${imageResourceName}}" alt="Image" width="730" height="200" />
+
+<div style="background-color: #dcb98a;margin: 6%;padding:6%;width: 60%;text-align: center">
+    <p th:text="${content}" style="text-align: center;font-size: 15px;color: white;font-weight: bold ">Default Content</p>
+
+    <div style="display: flex; justify-content: space-between; align-items: center">
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-linkedin"></i>
+    </div>
+</div>
+</body>
+</html>

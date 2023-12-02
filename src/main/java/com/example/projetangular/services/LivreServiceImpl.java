@@ -51,6 +51,11 @@ public class LivreServiceImpl implements ILivreService{
     }
 
     @Override
+    public Livre getLivreWithMaxEmprunts() {
+        return livreRepository.findLivreWithMaxEmprunts();
+    }
+
+    @Override
     public void deleteLivre(long idLivre) {
         livreRepository.deleteById(idLivre);
     }

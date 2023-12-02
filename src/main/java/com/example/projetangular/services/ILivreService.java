@@ -24,4 +24,7 @@ public interface ILivreService {
 
     void updateDisponibiliteLivre(Livre livre , boolean disp);
 
+
+    Livre getLivreWithMaxEmprunts();
+
 }
