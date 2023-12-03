@@ -63,6 +63,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
+                        .requestMatchers("/images/**")
+                        .permitAll()
+                        .requestMatchers("/images_livres/**")
+                        .permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
                         .requestMatchers(WHITE_LIST_URL)

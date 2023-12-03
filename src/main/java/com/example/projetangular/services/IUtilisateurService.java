@@ -26,5 +26,7 @@ public interface IUtilisateurService {
     Map<Universite, List<Utilisateur>> getEtudiantsByUniversite();
 
     boolean confirmUserAccount(String token);
+    Utilisateur getUtilisateurByEmprunt(long idEmprunt);
 
+    String getEmailUtilisateur(long id);
     }

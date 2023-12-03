@@ -1,5 +1,9 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +30,20 @@ public class Livre implements Serializable {
     Date dateDePublication;
     String Description;
     String image;
-    @ManyToOne()
+    int nbEmprunts;
+    int nbLike;
+    boolean disponibilite;
+
+    public void incrementerNbEmprunts() {
+        this.nbEmprunts++;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     Categorie categorie;
+
+
     @OneToMany(mappedBy = "livre")
+    @JsonManagedReference
     Set<EmpruntLivre> emprunts = new HashSet<>();
 }

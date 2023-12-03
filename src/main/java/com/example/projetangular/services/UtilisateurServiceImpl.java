@@ -75,7 +75,7 @@ public Utilisateur login(String email, String password) throws UsernameNotFoundE
     if (optionalUtilisateur.isPresent()) {
         Utilisateur utilisateur = optionalUtilisateur.get();
 
-        if (passwordEncoder.matches(password, utilisateur.getPassword())&& utilisateur.getEtat().equals("validé")) {
+        if (passwordEncoder.matches(password, utilisateur.getPassword())) {
             String jwtToken = jwtService.generateToken(utilisateur);
 
             // Set the generated token to the Utilisateur object
@@ -83,10 +83,10 @@ public Utilisateur login(String email, String password) throws UsernameNotFoundE
 
             return utilisateurRepository.save(utilisateur);
         } else {
-            throw new BadCredentialsException("Incorrect username or password");
+            throw new BadCredentialsException("mot de passe incorrect");
         }
     } else {
-        throw new UsernameNotFoundException("User not found with email: " + email);
+        throw new UsernameNotFoundException("pas d'utilisateur avec email: " + email);
     }
 }
 
@@ -191,4 +191,15 @@ public Utilisateur login(String email, String password) throws UsernameNotFoundE
             return false;
         }
     }
+    @Override
+    public Utilisateur getUtilisateurByEmprunt(long idEmprunt) {
+        return utilisateurRepository.findByEmpruntId(idEmprunt);
+    }
+
+    @Override
+    public String getEmailUtilisateur(long id) {
+        return utilisateurRepository.findEmailByUserId(id);
+    }
+
+
 }

@@ -73,10 +73,20 @@ public class UtilisateurController {
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         try {
             Utilisateur utilisateur = utilisateurService.login(loginRequest.getEmail(), loginRequest.getPassword());
-            // You can perform additional actions here if login is successful
+            if ("non confirmé".equals(utilisateur.getEtat())) {
+                String errorMessage = "un mail de confirmation a été envoyer à "+utilisateur.getEmail();
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
+            } else if ("confirmé".equals(utilisateur.getEtat())) {
+                // User status is unconfirmed
+                String errorMessage = "L'administrateur n'a pas encore validé votre compte";
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
+            }else if ("bloqué".equals(utilisateur.getEtat())) {
+                // User status is unconfirmed
+                String errorMessage = "votre compte a été bloqué";
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
+            }
             return new ResponseEntity<>(utilisateur, HttpStatus.OK);
         } catch (UsernameNotFoundException | BadCredentialsException e) {
-            // Handle authentication failure
             return ResponseEntity.status(401).body("Authentication failed: " + e.getMessage());
         }
     }
@@ -136,5 +146,9 @@ public class UtilisateurController {
         public void setPassword(String password) {
             this.password = password;
         }
+    }
+    @GetMapping("/emprunt/{idEmprunt}")
+    Utilisateur getUtilisateurByEmprunt(@PathVariable Long idEmprunt){
+        return utilisateurService.getUtilisateurByEmprunt(idEmprunt);
     }
 }

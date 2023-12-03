@@ -1,6 +1,7 @@
 package com.example.projetangular.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,7 +39,9 @@ public class Utilisateur implements UserDetails, Serializable {
 
     @ManyToMany()
     private Set<Reservation> reservations = new HashSet<>();
+
     @OneToMany(mappedBy = "etudiantEmp")
+    @JsonIgnore
     Set<EmpruntLivre>emprunts = new HashSet<>();
     @JsonIgnore
     @OneToMany(mappedBy = "etudiant")
