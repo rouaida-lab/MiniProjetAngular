@@ -1,5 +1,6 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,11 +33,16 @@ public class Utilisateur implements UserDetails, Serializable {
     Date dateNaissance;
     String etat;
     String token;
+    @OneToOne()
+    ConfirmationToken confirmationToken;
+
     @ManyToMany()
     private Set<Reservation> reservations = new HashSet<>();
     @OneToMany(mappedBy = "etudiantEmp")
     Set<EmpruntLivre>emprunts = new HashSet<>();
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "etudiant")
+    Set<Reclamation>reclamations =new HashSet<>();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
