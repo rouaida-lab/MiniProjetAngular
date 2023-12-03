@@ -1,4 +1,5 @@
 package com.example.projetangular.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Universite implements Serializable {
     long idUniversite ;
     String nomUniversite;
     String adresse;
+    @JsonIgnore
     @OneToOne()
     private Foyer foyer;
     @OneToMany(mappedBy = "universite")
