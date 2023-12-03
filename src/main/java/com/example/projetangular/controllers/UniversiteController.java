@@ -1,6 +1,8 @@
 package com.example.projetangular.controllers;
 
+import com.example.projetangular.entities.Departement;
 import com.example.projetangular.entities.Universite;
+import com.example.projetangular.service.IDepartementService;
 import com.example.projetangular.service.IUniversiteService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +11,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/universite")
+@RequestMapping("/Universite")
 public class UniversiteController {
 
     IUniversiteService universiteService;
+    IDepartementService departementService;
+
 
 
     @PostMapping("/add")
@@ -20,38 +24,54 @@ public class UniversiteController {
         return universiteService.addUniversite(universite);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getUniversiteById/{id}")
     public Universite retrieveUniversite(@PathVariable Long id) {
         return universiteService.getUniversite(id);
     }
 
-    @GetMapping
+    @GetMapping("/All")
     public List<Universite> retrieveUniversites() {
         return universiteService.getAllUniversites();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         universiteService.deleteUniversite(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Universite updateUniversite(
             @PathVariable Long id,
             @RequestParam("nomUniversite") String nomUniversite,
-            @RequestParam("adresse") String adresse) {
+            @RequestParam("adresse") String adresse,
+            @RequestParam("etatUniversite") String etatUniversite) {
 
         Universite universite = universiteService.getUniversite(id);
         universite.setNomUniversite(nomUniversite);
         universite.setAdresse(adresse);
+        universite.setEtatUniversite(etatUniversite);
 
         // Mettez à jour les autres champs si nécessaire
 
         return universiteService.updateUniversite(universite);
     }
 
-    @PutMapping("/universite/{idFoyer}/{idUniversite}")
+    @PutMapping("/universite/{idFoyecr}/{idUniversite}")
     public Universite affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable long idUniversite) {
         return universiteService.affecterFoyerAUniversite(idFoyer, idUniversite);
     }
+
+    @PutMapping("/affecterDepartementAUniversite/{departementId}/{universiteId}")
+    public Departement affecterDepartementAUniversite(
+            @PathVariable long departementId,
+            @PathVariable long universiteId
+    ) {
+        return departementService.affecterDepartementAUniversite(departementId, universiteId);
+    }
+
+    @GetMapping("/getDepartementsByNomUniversite/{nomUniversite}")
+    public List<Departement> getDepartementsByNomUniversite(@PathVariable String nomUniversite) {
+        return universiteService.getDepartementsByNomUniversite(nomUniversite);
+    }
+
 }

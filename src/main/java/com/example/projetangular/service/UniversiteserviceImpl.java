@@ -1,8 +1,10 @@
 package com.example.projetangular.service;
 
 
+import com.example.projetangular.entities.Departement;
 import com.example.projetangular.entities.Foyer;
 import com.example.projetangular.entities.Universite;
+import com.example.projetangular.repositories.DepartementRepository;
 import com.example.projetangular.repositories.FoyerRepository;
 import com.example.projetangular.repositories.UniversiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,13 @@ import java.util.List;
 @Service
 public class UniversiteserviceImpl implements IUniversiteService{
 
+
     @Autowired
     UniversiteRepository universiteRepository;
     @Autowired
     FoyerRepository foyerRepository;
+    @Autowired
+    DepartementRepository departementRepository;
 
     public UniversiteserviceImpl(UniversiteRepository universiteRepository){
         this.universiteRepository=universiteRepository;
@@ -70,5 +75,18 @@ public class UniversiteserviceImpl implements IUniversiteService{
         Universite universite= universiteRepository.findById(idUniversite).orElse(null);
         universite.setFoyer(null);
         return universiteRepository.save(universite);
+    }
+
+
+    @Override
+    public List<Departement> getDepartementsByNomUniversite(String nomUniversite) {
+        Universite universite = universiteRepository.findByNomUniversite(nomUniversite);
+
+        if (universite != null) {
+            return departementRepository.findByUniversite(universite);
+        } else {
+            // Gérer le cas où l'université n'est pas trouvée
+            return null;
+        }
     }
 }

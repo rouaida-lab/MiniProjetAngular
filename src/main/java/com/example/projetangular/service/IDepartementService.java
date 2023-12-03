@@ -18,5 +18,10 @@ public interface IDepartementService {
 
     Departement getDepartement(Long id);
 
+    List<Universite> getUniversites();
 
-}
+    Departement affecterDepartementAUniversite(Long departementId, Long universiteId);
+
+
+
+    }

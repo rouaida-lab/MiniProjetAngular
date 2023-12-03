@@ -1,5 +1,6 @@
 package com.example.projetangular.service;
 
+import com.example.projetangular.entities.Departement;
 import com.example.projetangular.entities.Universite;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface IUniversiteService {
 
     Universite desaffecterFoyerAUniversite(long idFoyer , long idUniversite);
 
-}
+    public List<Departement> getDepartementsByNomUniversite(String nomUniversite) ;
+
+    }
