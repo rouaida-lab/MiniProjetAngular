@@ -13,18 +13,21 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservation;
     private Date anneeUniversitaire;
-    Boolean estValide ;
+    private Boolean estValide ;
+
 
     //@ManyToMany(mappedBy="reservations")//reservation fils
     @ManyToMany(cascade = CascadeType.ALL)
     @JsonIgnore
-    // : lorsque on supprime l'etudiant on supprime la reservation aussi
+    // : lorsque on supprime l'etudiant on supp rime la reservation aussi
     private Set<Utilisateur> etudiants;
 
     @ManyToOne
