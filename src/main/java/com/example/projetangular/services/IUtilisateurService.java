@@ -19,7 +19,7 @@ public interface IUtilisateurService {
 
     boolean deleteUtilisateur(long idUtilisateur);
     Utilisateur updateUtilisateur(long id,Utilisateur u);
-    public Utilisateur affecterReservationToEtudiant(long idEtudiant, String idReservation);
+    public Utilisateur affecterReservationToEtudiant(long idEtudiant, Long idReservation);
     boolean isEmailAlreadyExists(String email);
      Utilisateur changerEtatUtilisateur(long id,String etat);
 

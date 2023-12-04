@@ -127,7 +127,7 @@ public Utilisateur login(String email, String password) throws UsernameNotFoundE
                 utilisateurRepository.save(u);
     }
     @Override
-    public Utilisateur affecterReservationToEtudiant(long idEtudiant, String idReservation){
+    public Utilisateur affecterReservationToEtudiant(long idEtudiant, Long idReservation){
         Utilisateur etudiant = utilisateurRepository.findById(idEtudiant).orElse(null);
         Reservation reservation = reservationRepository.findById(idReservation).orElse(null);
         etudiant.getReservations().add(reservation);
