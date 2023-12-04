@@ -45,7 +45,7 @@ public class ReclamationController {
         return ResponseEntity.ok(reclamationService.modifierReclamation(reclamation,id));
     }
     @PutMapping("/changerEtat")
-    public ResponseEntity<Reclamation> changerEtatReclamation(@RequestBody Reclamation reclamation,@RequestParam("etat") String etat) {
-        return ResponseEntity.ok(reclamationService.changerEtatReclamation(reclamation,etat));
+    public ResponseEntity<Reclamation> changerEtatReclamation(@RequestBody String etat,@RequestParam("id") Long id) {
+        return ResponseEntity.ok(reclamationService.changerEtatReclamation(id,etat));
     }
 }

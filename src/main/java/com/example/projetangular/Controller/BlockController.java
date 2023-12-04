@@ -65,6 +65,11 @@ public class BlockController {
     {
         return BlockserviceImpl.nbChambreParTypeEtBloc(type, idBloc);
     }
+    @PostMapping("/affecterChambresABloc/{numChambre}/{idBloc}")
+    public Bloc affecterChambresABloc(@PathVariable long numChambre,@PathVariable long idBloc)
+    {
+        return BlockserviceImpl.affecterChambresABloc(numChambre,idBloc);
+    }
 
     @GetMapping("/blocByIdFoyer/{idFoyer}")
     List<Bloc> getBlocs( @PathVariable long idFoyer)

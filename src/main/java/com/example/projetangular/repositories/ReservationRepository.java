@@ -16,8 +16,13 @@ public interface ReservationRepository extends CrudRepository<Reservation,Long> 
     List<Reservation>findByAnneeUniversitaireBefore(Date date);
     List<Reservation>findByAnneeUniversitaireBetweenAndEstValide(Date startDate, Date endDate,Boolean estValide);
     //List<Reservation>findByEstValide(Boolean estValide);
+    @Query("SELECT r FROM Reservation r JOIN Chambre c ON r MEMBER OF c.reservations " +
+            "WHERE r.anneeUniversitaire = ?1 AND c.idChambre = ?2 AND r.estValide = true")
+    Reservation findReservationDisponible(Date anneUni, Long idChambre);
 
-
+    @Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM Reservation r JOIN Chambre c ON r MEMBER OF c.reservations " +
+            "WHERE r.anneeUniversitaire = ?1 AND c.idChambre = ?2 AND r.estValide = ?3")
+    boolean existsReservation(Date anneUni, Long idChambre,Boolean valide);
     public List<Reservation> findFoyerByAnneeUniversitaire(Date annee_universitaire);
     void deleteByAnneeUniversitaire(Date annee_universitaire);
     Reservation findReservationByIdReservation(Long idReservation);

@@ -24,6 +24,7 @@ public interface ChambreRepository extends CrudRepository<Chambre,Long> {
     void deleteByNumeroChambre(Long numeroChambre);
     void deleteByIdChambre(Long idChambre);
     Chambre findChambreByIdChambre(Long idChambre);
+ List<Chambre> findChambresByBloc(Bloc b);
 
     @Query("SELECT c FROM Chambre c JOIN c.bloc b JOIN b.foyer f JOIN f.universite u WHERE u.idUniversite=: idUniversite")
     List<Chambre> getChambreByUniversite(@Param("idUniversite")Long idUniversite);

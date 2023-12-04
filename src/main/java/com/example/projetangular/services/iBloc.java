@@ -15,6 +15,8 @@ public interface iBloc {
     Bloc affecterChambresABloc(List<Long> numChambre, String nomBloc) ;
     Bloc affecterBlocAFoyer( String nomBloc, String nomFoyer) ;
     long nbChambreParTypeEtBloc(TypeChambre type, long idBloc) ;
+    public Bloc affecterChambresABloc(long numChambre, long
+            idBloc) ;
 
     List<Bloc> getBlocByIDFoyer(long idFoyer);
     List<Bloc> getBlocNonAffecter();

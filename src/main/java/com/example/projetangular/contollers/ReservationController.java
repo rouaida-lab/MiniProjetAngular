@@ -1,6 +1,7 @@
 package com.example.projetangular.contollers;
 import com.example.projetangular.entities.Chambre;
 import com.example.projetangular.entities.Reservation;
+import com.example.projetangular.entities.RoleUtilisateur;
 import com.example.projetangular.services.IChambreService;
 import com.example.projetangular.services.IReservationService;
 import lombok.AccessLevel;
@@ -39,5 +40,8 @@ public class ReservationController {
     public Reservation updateRes (@RequestBody Reservation res){
         return reservationService.mettreAJourReservation(res);
     }
-    
+    @PutMapping("/reserver")
+    public Reservation reserver (@RequestParam("chambreId") Long chambreId, @RequestParam("email") String email){
+        return reservationService.reserverChambre(chambreId,email);
+    }
 }

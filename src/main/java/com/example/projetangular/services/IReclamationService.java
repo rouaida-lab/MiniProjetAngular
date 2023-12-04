@@ -9,6 +9,6 @@ public interface IReclamationService {
     List<Reclamation>listeReclamationsParEtudiant(String email,String etat);
     List<Reclamation>listeReclamations(String etat);
     Reclamation modifierReclamation(Reclamation reclamation,long idRec);
-    Reclamation changerEtatReclamation(Reclamation reclamation,String etat);
+    Reclamation changerEtatReclamation(Long id,String etat);
 
 }

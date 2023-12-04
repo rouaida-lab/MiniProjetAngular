@@ -35,7 +35,8 @@ public class ReclamationServiceImp implements IReclamationService{
     }
 
     @Override
-    public Reclamation changerEtatReclamation(Reclamation reclamation, String etat) {
+    public Reclamation changerEtatReclamation(Long id, String etat) {
+        Reclamation reclamation = reclamationRepository.findById(id).orElse(null);
         reclamation.setEtat(etat);
         return reclamationRepository.save(reclamation);
     }

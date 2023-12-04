@@ -17,7 +17,10 @@ public class UniversiteController {
     IUniversiteService universiteService;
     IDepartementService departementService;
 
-
+    @PostMapping("/affecterFU/{idFoyer}/{nomUniversite}")
+    public Universite affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable String nomUniversite) {
+        return universiteService.affecterFoyerAUniversite(idFoyer, nomUniversite);
+    }
 
     @PostMapping("/add")
     public Universite addUniversite(@RequestBody Universite universite) {

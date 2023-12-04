@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RequestMapping("api/chambres")
@@ -48,6 +49,11 @@ public class ChambreController {
     @PutMapping("/updateChambre")
     public Chambre updateChambre (@RequestBody Chambre c){
         return chambreService.mettreAJourChambre(c);
+    }
+    @GetMapping("/getChambreByIDBloc/{idBloc}")
+    public List<Chambre> getChambreByIDBloc(@PathVariable long idBloc)
+    {
+        return  chambreService.getChambreByIDBloc(idBloc);
     }
 
 

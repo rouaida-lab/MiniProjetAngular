@@ -28,4 +28,5 @@ public interface IReservationService   {/*
     Reservation mettreAJourReservation(Reservation res);
 
     public List<Reservation> getReservationsByEtudiant(Utilisateur utilisateur);
+    public Reservation reserverChambre(Long chambreId,String emailEtudiant);
 }

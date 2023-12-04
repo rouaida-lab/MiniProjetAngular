@@ -5,7 +5,9 @@ import com.example.projetangular.entities.Chambre;
 import com.example.projetangular.entities.Foyer;
 import com.example.projetangular.entities.TypeChambre;
 import com.example.projetangular.repositories.BlocRepository;
+import com.example.projetangular.repositories.ChambreRepository;
 import com.example.projetangular.repositories.FoyerRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,15 +15,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class impServiceBloc implements iBloc {
     BlocRepository blocRespository;
     //  ChambreRepository ChambreRepository ;
     FoyerRepository FoyerRepository;
+    ChambreRepository chambreRepository;
 
-    public impServiceBloc(BlocRepository blocRespository, FoyerRepository foyerRepository) {
-        this.blocRespository = blocRespository;
-        FoyerRepository = foyerRepository;
-    }
 
     @Override
     public Bloc addBloc(Bloc bloc) {
@@ -99,6 +99,15 @@ public class impServiceBloc implements iBloc {
         Foyer f=FoyerRepository.findById(idFoyer).orElse(null);
         List<Bloc> list = blocRespository.findBlocsByFoyer(f);
         return list;
+    }
+    @Override
+    public Bloc affecterChambresABloc(long numChambre, long idBloc) {
+        Bloc bloc=blocRespository.findById(idBloc).orElse(null);
+        Chambre chambre=chambreRepository.findById(numChambre).orElse(null);
+        bloc.getChambres().add(chambre);
+        chambre.setBloc(bloc);
+        chambreRepository.save(chambre);
+        return blocRespository.save(bloc);
     }
 
     @Override

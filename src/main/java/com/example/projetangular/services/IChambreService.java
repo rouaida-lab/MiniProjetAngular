@@ -13,6 +13,7 @@ public interface IChambreService {
     Chambre updateChambre(Chambre chambre);
 
 */
+   List<Chambre> getChambreByIDBloc(long idBloc);
 
 
     public Chambre ajouterChambre(Chambre chambre);
