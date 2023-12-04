@@ -8,9 +8,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Date;
+import java.util.List;
 
 public interface EvenementRepository extends JpaRepository<Evenement,Long> {
     Evenement findByNomE(String nomE);
+    List<Evenement> findAllByBibliotheque(Bibliotheque bibliotheque);
+
     @Transactional
     @Modifying
     @Query("UPDATE Evenement e SET e.dateDebut = :newDateDebut WHERE e.idEvenement = :eventId")

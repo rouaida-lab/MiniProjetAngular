@@ -29,7 +29,10 @@ public class Config implements WebMvcConfigurer {
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
         exposeDirectory("images_events", registry);
+        exposeDirectory("images_biblios", registry);
+
     }
 
 

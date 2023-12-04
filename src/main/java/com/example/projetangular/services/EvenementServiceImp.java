@@ -57,7 +57,10 @@ public class EvenementServiceImp implements IEvenementService {
     public void updateEventStartDate(long eventId, Date newStartDate) {
         evenementRepository.updateDateDebut(eventId, newStartDate);
     }
-
+    @Override
+    public List<Evenement> getAllEvenementsByBibliotheque(Bibliotheque bibliotheque) {
+        return evenementRepository.findAllByBibliotheque(bibliotheque);
+    }
 
     @Override
     public Evenement affecterEvenementABibliotheque(String nomE, String nomB) {

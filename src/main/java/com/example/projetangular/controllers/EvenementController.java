@@ -2,8 +2,10 @@ package com.example.projetangular.controllers;
 
 import com.example.projetangular.FileUpload;
 import com.example.projetangular.UpdateStartDateDTO;
+import com.example.projetangular.entities.Bibliotheque;
 import com.example.projetangular.entities.EtatEvent;
 import com.example.projetangular.entities.Evenement;
+import com.example.projetangular.services.IBibliothequeService;
 import com.example.projetangular.services.IEvenementService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +30,11 @@ import java.nio.file.Paths;
 
 public class EvenementController {
     IEvenementService evenementService;
+    IBibliothequeService bibliothequeService;
 
 @PostMapping("/addEvenement")
 public Evenement addEvenement(
+        @RequestParam("idBibliotheque") String idBibliotheque,
         @RequestParam("nomE") String nomE,
         @RequestParam("dateDebut") String dateDebut,
         @RequestParam("dateFin") String dateFin,
@@ -41,8 +45,12 @@ public Evenement addEvenement(
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date parseddateDebut = dateFormat.parse(dateDebut);
     Date parseddateFin = dateFormat.parse(dateFin);
+    long idBibliothequeLong = Long.parseLong(idBibliotheque);
 
     Evenement evenement = new Evenement();
+    Bibliotheque bibliotheque = bibliothequeService.getBibliotheque(idBibliothequeLong);
+
+    evenement.setBibliotheque(bibliotheque);
     evenement.setNomE(nomE);
     evenement.setDateDebut(parseddateDebut);
     evenement.setDateFin(parseddateFin);
@@ -82,7 +90,12 @@ public Evenement addEvenement(
         evenementService.updateEventStartDate(idEvenement, updateStartDateDTO.getNewStartDate());
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/bibliotheque/{idBibliotheque}")
+    List<Evenement> retrieveEvenementsByBibliotheques(@PathVariable Long idBibliotheque){
 
+        Bibliotheque bibliotheque = bibliothequeService.getBibliotheque(idBibliotheque);
+        return evenementService.getAllEvenementsByBibliotheque(bibliotheque);
+    }
 
     @PutMapping("/aff/{nomEvenement}/{nomBibliotheque}")
     public Evenement affecterEvenementABiblio(@PathVariable String nomEvenement,@PathVariable String nomBibliotheque){

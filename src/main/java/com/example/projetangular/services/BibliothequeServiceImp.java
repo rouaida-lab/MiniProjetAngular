@@ -50,6 +50,11 @@ public class BibliothequeServiceImp implements IBibliothequeService {
         return bibliothequeRepository.save(bibliotheque) ;
   }
 
+
+    @Override
+    public Bibliotheque getBibliothequeByFoyer(Foyer foyer) {
+        return bibliothequeRepository.findByFoyer(foyer);
+    }
     @Override
     public Bibliotheque affecterBibliothequeAFoyer(String nomB, String nomFoyer) {
         Bibliotheque bibliotheque = bibliothequeRepository.findByNomB(nomB);

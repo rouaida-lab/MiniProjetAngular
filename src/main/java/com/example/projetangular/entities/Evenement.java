@@ -1,5 +1,6 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +29,8 @@ public class Evenement implements Serializable {
     EtatEvent etatEvent;
 
     String image;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     Bibliotheque bibliotheque;
 
 }

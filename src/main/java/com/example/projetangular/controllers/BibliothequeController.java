@@ -1,11 +1,22 @@
 package com.example.projetangular.controllers;
 
+import com.example.projetangular.FileUpload;
 import com.example.projetangular.entities.Bibliotheque;
+import com.example.projetangular.entities.EtatEvent;
+import com.example.projetangular.entities.Evenement;
+import com.example.projetangular.entities.Foyer;
 import com.example.projetangular.services.IBibliothequeService;
+import com.example.projetangular.services.IFoyerService;
 import lombok.AllArgsConstructor;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 
@@ -16,12 +27,30 @@ import java.util.List;
 
 public class BibliothequeController {
     IBibliothequeService bibliothequeService;
+    IFoyerService foyerService;
 
-@PostMapping("/addbibliotheque")
-Bibliotheque addBibliotheque(@RequestBody Bibliotheque bibliotheque){
+    @PostMapping("/addbibliotheque")
+    public Bibliotheque addBibliotheque(
+            @RequestParam("nomB") String nomB,
+            @RequestParam("email") String email,
+            @RequestParam("numTel") long numTel,
+            @RequestParam("horaire") String horaire,
+            @RequestParam("description") String description,
+            @RequestParam("imageB") MultipartFile multipartFile) throws IOException, ParseException {
 
-    return bibliothequeService.addBibliotheque(bibliotheque);
-}
+        Bibliotheque bibliotheque = new Bibliotheque();
+        bibliotheque.setNomB(nomB);
+        bibliotheque.setEmail(email);
+        bibliotheque.setNumTel(numTel);
+        bibliotheque.setHoraire(horaire);
+        bibliotheque.setDescription(description);
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        bibliotheque.setImageB(fileName);
+        Bibliotheque SavedBiblio = bibliothequeService.addBibliotheque(bibliotheque);
+        String uploadDir = "images_biblios/" + SavedBiblio.getIdBibliotheque();
+        FileUpload.saveFile(uploadDir, fileName, multipartFile);
+        return SavedBiblio;
+    }
     @GetMapping("/{id}")
     Bibliotheque retrieveBibliotheque(@PathVariable Long id){
 
@@ -49,5 +78,11 @@ Bibliotheque addBibliotheque(@RequestBody Bibliotheque bibliotheque){
         return  bibliothequeService.affecterBibliothequeAFoyer(nombibliotheque,nomFoyer);
     }
 
+    @GetMapping("/byfoyer/{idFoyer}")
+    public Bibliotheque retrieveBibliothequeByFoyer(@PathVariable Long idFoyer){
+
+        Foyer foyer = foyerService.getFoyer(idFoyer);
+        return bibliothequeService.getBibliothequeByFoyer(foyer);
+    }
 
 }
