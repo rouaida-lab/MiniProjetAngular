@@ -2,8 +2,8 @@ package com.example.projetangular.controllers;
 
 import com.example.projetangular.entities.Departement;
 import com.example.projetangular.entities.Universite;
-import com.example.projetangular.service.IDepartementService;
-import com.example.projetangular.service.IUniversiteService;
+import com.example.projetangular.services.IDepartementService;
+import com.example.projetangular.services.IUniversiteService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

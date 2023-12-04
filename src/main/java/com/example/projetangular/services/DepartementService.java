@@ -1,11 +1,7 @@
-package com.example.projetangular.service;
+package com.example.projetangular.services;
 
-import com.example.projetangular.entities.Foyer;
 import com.example.projetangular.entities.Universite;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 import com.example.projetangular.entities.Departement;
 import com.example.projetangular.repositories.DepartementRepository;
 import com.example.projetangular.repositories.UniversiteRepository;
@@ -14,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
-public class DepartementService implements  IDepartementService {
+public class DepartementService implements IDepartementService {
 
     @Autowired
     DepartementRepository departementRepository;

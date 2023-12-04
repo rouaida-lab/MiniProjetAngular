@@ -87,7 +87,7 @@ public class UtilisateurController {
             }
             return new ResponseEntity<>(utilisateur, HttpStatus.OK);
         } catch (UsernameNotFoundException | BadCredentialsException e) {
-            return ResponseEntity.status(401).body("Authentication failed: " + e.getMessage());
+            return ResponseEntity.status(401).body("Erreur d'authentification: " + e.getMessage());
         }
     }
 

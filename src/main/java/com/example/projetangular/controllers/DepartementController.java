@@ -3,11 +3,9 @@ package com.example.projetangular.controllers;
 
 import com.example.projetangular.entities.Departement;
 import com.example.projetangular.entities.Universite;
-import com.example.projetangular.service.IDepartementService;
+import com.example.projetangular.services.IDepartementService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
