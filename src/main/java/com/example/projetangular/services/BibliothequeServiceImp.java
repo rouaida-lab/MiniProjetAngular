@@ -1,7 +1,12 @@
 package com.example.projetangular.services;
 
 import com.example.projetangular.entities.Bibliotheque;
+import com.example.projetangular.entities.Evenement;
 import com.example.projetangular.entities.Foyer;
+import com.example.projetangular.entities.Livre;
+import com.example.projetangular.repositories.EvenementRepository;
+import com.example.projetangular.repositories.LivreRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import  com.example.projetangular.repositories.BibliothequeRepository ;
 import   com.example.projetangular.repositories.FoyerRepository;
@@ -9,19 +14,13 @@ import   com.example.projetangular.repositories.FoyerRepository;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class BibliothequeServiceImp implements IBibliothequeService {
    BibliothequeRepository bibliothequeRepository ;
     FoyerRepository foyerRepository ;
+    EvenementRepository evenementRepository ;
 
-
-
-    public BibliothequeServiceImp(BibliothequeRepository bibliothequeRepository) {
-
-        this.bibliothequeRepository = bibliothequeRepository;
-    }
-
-
-
+    LivreRepository livreRepository;
 
 
 
@@ -49,6 +48,15 @@ public class BibliothequeServiceImp implements IBibliothequeService {
         bibliotheque.setIdBibliotheque(idBibliotheque);
         return bibliothequeRepository.save(bibliotheque) ;
   }
+    @Override
+    public Bibliotheque getBibliothequeByEvenement(long idEvenement) {
+        Evenement evenement = evenementRepository.findById(idEvenement).orElse(null);
+        if (evenement != null) {
+            return evenement.getBibliotheque();
+        } else {
+            return null;
+        }
+    }
 
 
     @Override
@@ -63,4 +71,10 @@ public class BibliothequeServiceImp implements IBibliothequeService {
         return bibliothequeRepository.save(bibliotheque);
 
 }
+
+    @Override
+    public Bibliotheque ajouterLivreBiblio(Livre livre,Bibliotheque bibliotheque) {
+        bibliotheque.getLivres().add(livre);
+        return bibliothequeRepository.save(bibliotheque) ;
+    }
 }

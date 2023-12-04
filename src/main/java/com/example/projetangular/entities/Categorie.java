@@ -1,5 +1,6 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,5 +23,6 @@ public class Categorie implements Serializable{
     String nom;
     String description;
     @OneToMany(mappedBy = "categorie")
+           @JsonIgnore
     Set<Livre>livres = new HashSet<>();
 }

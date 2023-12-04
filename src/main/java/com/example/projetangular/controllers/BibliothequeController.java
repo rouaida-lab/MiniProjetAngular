@@ -1,12 +1,10 @@
 package com.example.projetangular.controllers;
 
 import com.example.projetangular.FileUpload;
-import com.example.projetangular.entities.Bibliotheque;
-import com.example.projetangular.entities.EtatEvent;
-import com.example.projetangular.entities.Evenement;
-import com.example.projetangular.entities.Foyer;
+import com.example.projetangular.entities.*;
 import com.example.projetangular.services.IBibliothequeService;
 import com.example.projetangular.services.IFoyerService;
+import com.example.projetangular.services.ILivreService;
 import lombok.AllArgsConstructor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +26,10 @@ import java.util.List;
 public class BibliothequeController {
     IBibliothequeService bibliothequeService;
     IFoyerService foyerService;
+
+    ILivreService livreService;
+
+
 
     @PostMapping("/addbibliotheque")
     public Bibliotheque addBibliotheque(
@@ -78,6 +80,16 @@ public class BibliothequeController {
         return  bibliothequeService.affecterBibliothequeAFoyer(nombibliotheque,nomFoyer);
     }
 
+
+    @PutMapping("/ajoutLivre/{idLivre}/{idBiblio}")
+    public Bibliotheque ajouterLivreBiblio(@PathVariable Long idLivre,@PathVariable Long idBiblio){
+        Livre livre  = livreService.getLivre(idLivre);
+        Bibliotheque bilio = bibliothequeService.getBibliotheque(idBiblio);
+
+        return  bibliothequeService.ajouterLivreBiblio(livre,bilio);
+    }
+
+
     @GetMapping("/byfoyer/{idFoyer}")
     public Bibliotheque retrieveBibliothequeByFoyer(@PathVariable Long idFoyer){
 
@@ -85,4 +97,8 @@ public class BibliothequeController {
         return bibliothequeService.getBibliothequeByFoyer(foyer);
     }
 
+    @GetMapping("/evenement/{idEvenement}")
+    Bibliotheque retrieveBibliothequeByEvenement(@PathVariable Long idEvenement){
+        return bibliothequeService.getBibliothequeByEvenement(idEvenement);
+    }
 }
