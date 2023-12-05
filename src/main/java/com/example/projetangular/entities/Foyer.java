@@ -1,5 +1,6 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -30,7 +31,9 @@ public class Foyer implements Serializable {
     @OneToOne(mappedBy = "foyer")
     private Universite universite;
 
-
+    @OneToOne()
+    @JsonBackReference
+    private Bibliotheque bibliotheque;
     public Foyer(String nomFoyer, long capaciteFoyer, String image, String description, String type, Set<Bloc> blocs, Universite universite) {
         this.nomFoyer = nomFoyer;
         this.capaciteFoyer = capaciteFoyer;
