@@ -1,5 +1,7 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -29,7 +31,7 @@ public class Chambre implements Serializable {
 
 
     @ManyToOne()
-      Bloc bloc;
+    Bloc bloc;
 
     @OneToMany(mappedBy = "chambre",cascade = CascadeType.ALL)
     private Set<Reservation> reservations;

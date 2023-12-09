@@ -72,11 +72,13 @@ public class impServiceFoyer implements iFoyer {
     public List<Foyer> getFoyerParTypeMixte() {
         List<Foyer> f = FoyerRespository.findAll();
         List<Foyer> mixte = new ArrayList<>();
+
         for(Foyer l : f)
         {
-            if(l.getType().equals("mixte"))
-            {
-                mixte.add(l);
+            if(l.getType()!=null) {
+                if (l.getType().equals("mixte")) {
+                    mixte.add(l);
+                }
             }
         }
         return mixte;
@@ -88,9 +90,10 @@ public class impServiceFoyer implements iFoyer {
         List<Foyer> sexeType = new ArrayList<>();
         for(Foyer l : f1)
         {
-            if(l.getType().equals("Fille") || l.getType().equals("garcon")  )
-            {
-                sexeType.add(l);
+            if(l.getType()!=null) {
+                if (l.getType().equals("Fille") || l.getType().equals("garcon")) {
+                    sexeType.add(l);
+                }
             }
         }
         return sexeType;
