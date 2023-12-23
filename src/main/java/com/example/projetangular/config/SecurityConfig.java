@@ -62,19 +62,23 @@ public class SecurityConfig {
 
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                authorizeRequests -> authorizeRequests
-                        .requestMatchers("/images/**")
-                        .permitAll()
-                        .requestMatchers("/images_livres/**")
-                        .permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/**")
-                        .permitAll()
-                        .requestMatchers(WHITE_LIST_URL)
-                        .permitAll()
-                        .requestMatchers(ADMIN_LIST_URL)
-                        .hasAuthority("ADMIN")
-                        .anyRequest()
-                        .authenticated()
+                        authorizeRequests -> authorizeRequests
+                                .requestMatchers("/images/**")
+                                .permitAll()
+                                .requestMatchers("/images_livres/**")
+                                .permitAll()
+                                .requestMatchers("/images_biblios/**")
+                                .permitAll()
+                                .requestMatchers("/images_events/**")
+                                .permitAll()
+                                .requestMatchers(HttpMethod.OPTIONS, "/**")
+                                .permitAll()
+                                .requestMatchers(WHITE_LIST_URL)
+                                .permitAll()
+                                .requestMatchers(ADMIN_LIST_URL)
+                                .hasAuthority("ADMIN")
+                                .anyRequest()
+                                .authenticated()
 
 
                 )
@@ -102,4 +106,3 @@ public class SecurityConfig {
         return source;
     }
 }
-

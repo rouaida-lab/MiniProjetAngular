@@ -1,5 +1,6 @@
 package com.example.projetangular.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +26,7 @@ public class Foyer implements Serializable {
     private Set<Bloc> blocs;
     @OneToOne(mappedBy = "foyer")
     private Universite universite;
+    @OneToOne()
+    @JsonBackReference
+    private Bibliotheque bibliotheque;
 }
